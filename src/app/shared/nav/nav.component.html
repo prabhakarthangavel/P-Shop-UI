@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <span><img class="img-responsive img-class " src="assets/logo.png"></span> 
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   <div class="collapse navbar-collapse" id="navbarMenu">  
+    <ul class="navbar-nav ml-auto">    
+      <!-- this part invoked when user didnt login -->
+        <li class="nav-item navbar-nav">
+            <a class="nav-link" routerLink="/login">Login</a>
+            <a class="nav-link" routerLink="/products">Products</a>
+            <a class="nav-link" routerLink="/shopping-cart">Shopping Cart
+              <span class="badge badge-warning badge-pill">
+                  Count
+                  <!-- this totalItemsCount call ngOninit and get() from there it returns items to shopping-cart class -->
+              </span></a>
+        </li>
+
+     <li class="nav-item">
+       <a class="nav-link" routerLink="/products">Products</a>
+     </li>
+ 
+     <div class="dropdown">
+      <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+        UserName
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" routerLink="/app-my-orders">My Orders</a>
+        <a class="dropdown-item" routerLink="/app-checkout">Check Out</a>
+        <a class="dropdown-item" routerLink="/admin/products">Admin Products</a> 
+        <a class="dropdown-item" (click)="logout()" href="">Logout</a>
+      </div>
+  </div>
+   </ul>
+   
+   </div>
+   
+ </nav>
+ 
+   
