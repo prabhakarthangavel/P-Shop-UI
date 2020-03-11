@@ -10,17 +10,13 @@ import { ProductService } from '../../product.service';
 export class ProductCardComponent implements OnInit {
   @Input('product')product: ProductInterface;
   constructor(private _service: ProductService) { 
-    this._service.sub.subscribe(
-      data => {
-        console.log("inside product card comp",data);
-      });
   }
 
   ngOnInit() {
-   
   }
 
   addToCart(){
     console.log(this.product);
+    
   }
 }

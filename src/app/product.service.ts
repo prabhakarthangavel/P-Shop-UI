@@ -10,10 +10,8 @@ export class ProductService {
   }
 
   getProducts(path):Observable<any>{
-    const param:HttpParams = new HttpParams().set('path',path);
-    return this._http.get(this.allProducts,{
-      params: param
-    });
+    const param:HttpParams = new HttpParams().set('product',path);
+    return this._http.get(this.allProducts+"/"+path); 
   }
 
 }

@@ -23,8 +23,6 @@ export class ProductsComponent implements OnInit {
       data => {
         console.log("data",data);
         this.allProducts = data;
-      });
-
+        });
   }
-
 }
