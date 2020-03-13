@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticateService {
   private loginUrl: string = "http://localhost:8080/auth/authentication";
-  public authenticated: boolean;
+  public username: string = "User Name";
+  private storageSub= new Subject<string>();
   constructor(private _http:HttpClient) { }
 
   login(content): Observable<any> {
@@ -20,18 +22,18 @@ export class AuthenticateService {
     return this._http.get(this.loginUrl,{headers:headers});
   }
 
-  invokPost(){
-    return this._http.get("http://localhost:8080/auth/admin")
-      .pipe(
-        catchError(this.handleError));
+  watchStorage(): Observable<any> {
+    return this.storageSub.asObservable();
   }
 
-  setAuthenticated(authenticated){
-    this.authenticated = authenticated;
+  setItem(key: string, data: any) {
+    sessionStorage.setItem(key, data);
+    this.storageSub.next('added');
   }
 
-  getAuthenticated(){
-    return this.authenticated;
+  removeItem(key) {
+    sessionStorage.removeItem(key);
+    this.storageSub.next('removed');
   }
 
   private handleError(error: HttpErrorResponse) {

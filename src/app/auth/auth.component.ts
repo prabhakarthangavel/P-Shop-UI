@@ -18,10 +18,6 @@ export class AuthComponent implements OnInit {
   constructor(private _service:AuthenticateService){ }
 
   ngOnInit() {
-    this._service.invokPost().subscribe(
-      response =>{
-        console.log("adminResponse",response);
-      });
   }
 
   loginForm = new FormGroup({
@@ -34,14 +30,16 @@ export class AuthComponent implements OnInit {
       response =>{
         let data:any = response;
         if(data.status == "Authenticated"){
-          this._service.setAuthenticated(true);
-          localStorage.setItem("Authorization","Basic " + btoa(this.loginForm.value.username+":"+this.loginForm.value.password));
+          sessionStorage.setItem("Authenticated","true");
+          sessionStorage.setItem("Authorization","Basic " + btoa(this.loginForm.value.username+":"+this.loginForm.value.password));
+          this._service.setItem("username",this.loginForm.value.username);
         }
       },error=>{
         let err:any = error;
         if(err.error.message == "Unauthorized"){
-          this._service.setAuthenticated(false);
-          localStorage.removeItem("Authorization");
+          sessionStorage.setItem("Authenticated","false");
+          sessionStorage.removeItem("Authorization");
+          this._service.removeItem("username");
         }
       }
     )

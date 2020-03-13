@@ -8,7 +8,7 @@
     <ul class="navbar-nav ml-auto">    
       <!-- this part invoked when user didnt login -->
         <li class="nav-item navbar-nav">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a *ngIf="!login" class="nav-link" routerLink="/login">Login</a>
             <a class="nav-link" routerLink="/products">Products</a>
             <a class="nav-link" routerLink="/shopping-cart">Shopping Cart
               <span class="badge badge-warning badge-pill">
@@ -23,7 +23,7 @@
  
      <div class="dropdown">
       <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-        UserName
+        {{ name | titlecase}}
       </button>
       <div class="dropdown-menu">
         <a class="dropdown-item" routerLink="/app-my-orders">My Orders</a>

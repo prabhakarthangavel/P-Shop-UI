@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../product.service';
+import { AuthenticateService } from '../../auth/authenticate.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,10 +8,28 @@ import { ProductService } from '../../product.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
-  constructor(private _service:ProductService) { }
+  public login: boolean;
+  public name: string =  "User name";
+  constructor(private _service:ProductService,private _auth:AuthenticateService) {
+    let authenticated = sessionStorage.getItem('Authenticated');
+    if(authenticated == "true"){
+      this.login = true;
+      this.name = sessionStorage.getItem('username');
+    }
+   }
 
   ngOnInit() {
+    this._auth.watchStorage().subscribe(
+      response => {
+        if(response == "added"){
+          this.login = true; 
+          this.name = sessionStorage.getItem('username');
+        }else{
+          this.login = false;
+          this.name = "User name";
+        }
+      }
+    )
   }
 
 }
