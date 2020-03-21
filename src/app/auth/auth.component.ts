@@ -10,12 +10,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  private register: boolean;
-  private loginFlag: boolean = true;
   public invalidLogin: boolean;
   public message: string;
   public subscription:Subscription;
-  constructor(private _service:AuthenticateService){ }
+  constructor(private _service:AuthenticateService,private _router:Router){ }
 
   ngOnInit() {
   }
@@ -33,22 +31,17 @@ export class AuthComponent implements OnInit {
           sessionStorage.setItem("Authenticated","true");
           sessionStorage.setItem("Authorization","Basic " + btoa(this.loginForm.value.username+":"+this.loginForm.value.password));
           this._service.setItem("username",this.loginForm.value.username);
+          this._router.navigate(["/products"]);
         }
       },error=>{
         let err:any = error;
+        this.invalidLogin = true;
+        this.message = err.error.message;
         if(err.error.message == "Unauthorized"){
           sessionStorage.setItem("Authenticated","false");
           sessionStorage.removeItem("Authorization");
           this._service.removeItem("username");
         }
-      }
-    )
-  }
-
-  invokPost(){
-    this.subscription = this._service.invokPost().subscribe(
-      response =>{
-        console.log("adming***",response);
       }
     )
   }

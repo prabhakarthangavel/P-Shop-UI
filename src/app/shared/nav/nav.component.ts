@@ -11,7 +11,7 @@ export class NavComponent implements OnInit {
   public login: boolean;
   public name: string =  "User name";
   constructor(private _service:ProductService,private _auth:AuthenticateService) {
-    let authenticated = sessionStorage.getItem('Authenticated');
+    const authenticated = sessionStorage.getItem('Authenticated');
     if(authenticated == "true"){
       this.login = true;
       this.name = sessionStorage.getItem('username');
@@ -19,6 +19,7 @@ export class NavComponent implements OnInit {
    }
 
   ngOnInit() {
+    this._service.getShoppingCart().subscribe();
     this._auth.watchStorage().subscribe(
       response => {
         if(response == "added"){

@@ -18,7 +18,7 @@ export class AuthenticateService {
     let username =  content.username;
     let password = content.password;
     headers = headers.append("Authorization", "Basic " + btoa(username+":"+password));
-    // headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
+    headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
     return this._http.get(this.loginUrl,{headers:headers});
   }
 

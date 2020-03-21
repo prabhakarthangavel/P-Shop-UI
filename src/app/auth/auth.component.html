@@ -9,12 +9,10 @@
       <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
     </div>  
     <div>
-      <label class="link" routerLink="/register">Register new user</label>
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
-    <button type="submit" class="btn btn-primary" (click)="invokPost()">Test</button>
     <div>
-      <label *ngIf="invalidLogin" class="alert alert-warning">{{message}}</label>
+      <label *ngIf="invalidLogin" class="alert alert-danger">{{message}}</label>
     </div>
   </form>
 
