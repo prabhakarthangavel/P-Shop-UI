@@ -12,7 +12,7 @@
             <a class="nav-link" routerLink="/products">Products</a>
             <a *ngIf="login" class="nav-link" routerLink="/shopping-cart">Shopping Cart
               <span class="badge badge-warning badge-pill">
-                  Count
+                 {{cartData}}
                   <!-- this totalItemsCount call ngOninit and get() from there it returns items to shopping-cart class -->
               </span></a>
         </li>
@@ -37,5 +37,4 @@
    </div>
    
  </nav>
- 
    

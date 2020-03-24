@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Observer} from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -25,4 +26,6 @@ export class ProductsComponent implements OnInit {
         this.allProducts = data;
         });
   }
+
+
 }
