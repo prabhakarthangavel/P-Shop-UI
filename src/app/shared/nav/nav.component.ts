@@ -45,6 +45,7 @@ export class NavComponent implements OnInit, OnDestroy {
           let value = response.cartProduct[i].quantity;
           quantity = quantity + value;
         }
+        this._service.setProduct(response);
         this._service.changeCart(quantity);
       });
     this.subscription = this._service.cartItem$.subscribe(

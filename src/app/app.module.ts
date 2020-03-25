@@ -11,6 +11,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
 import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     ProductsComponent,
     ProductCardComponent,
     AuthComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

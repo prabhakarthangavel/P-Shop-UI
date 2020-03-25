@@ -29,10 +29,12 @@ export class ProductCardComponent implements OnInit {
             let value = data.cartProduct[i].quantity;
             quantity = quantity + value;
           }
+          this._service.setProduct(data);
           this._service.changeCart(quantity);
       });
     }else{
       this._router.navigate(["/login"]);
     }
   }
+  
 }
