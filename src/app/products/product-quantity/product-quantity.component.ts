@@ -15,7 +15,7 @@ export class ProductQuantityComponent implements OnInit {
   }
 
   addToCart(){
-    this._service.addToCart(this.product.title).subscribe(
+    this._service.addToCart(this.product).subscribe(
       data=> {
         var quantity = 0;
         for(let i=0;i<data.cartProduct.length;i++){

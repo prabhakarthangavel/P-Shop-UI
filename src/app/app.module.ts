@@ -12,6 +12,7 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductQuantityComponent } from './products/product-quantity/product-qu
     ProductCardComponent,
     AuthComponent,
     RegisterComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

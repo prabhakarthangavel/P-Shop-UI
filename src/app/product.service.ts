@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { AuthenticateService } from './auth/authenticate.service';
+import { ProductInterface } from './products/ProductInterface';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,7 @@ export class ProductService {
   public cartItem$ = this._navItemSource.asObservable();
   public cartProduct$ = this.cartProducts.asObservable();
 
+  //Cart Quantity
   changeCart(number) {
     this._navItemSource.next(number);
   }
@@ -31,14 +34,17 @@ export class ProductService {
     return this._http.get(this.getCart);
   }
 
+  //Cart Products
   setProduct(products){
     this.cartProducts.next(products);
   }
 
-  addToCart(product):Observable<any>{
+  addToCart(product:ProductInterface):Observable<any>{
     const request = {
       id: sessionStorage.getItem('Authorization'),
-      product: product
+      product: product.title,
+      image_url: product.image_url,
+      price: product.price
     }
     return this._http.post(this.addCart,request);
   }

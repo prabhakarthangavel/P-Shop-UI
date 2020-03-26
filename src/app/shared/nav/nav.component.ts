@@ -41,20 +41,15 @@ export class NavComponent implements OnInit, OnDestroy {
     this.subscription =this._service.getShoppingCart().subscribe(
       response=>{
         var quantity = 0;
-        for(let i=0;i<response.cartProduct.length;i++){
-          let value = response.cartProduct[i].quantity;
-          quantity = quantity + value;
+        if(response){
+          for(let i=0;i<response.cartProduct.length;i++){
+            let value = response.cartProduct[i].quantity;
+            quantity = quantity + value;
+          }
+          this._service.setProduct(response);
+          this._service.changeCart(quantity);
         }
-        this._service.setProduct(response);
-        this._service.changeCart(quantity);
-      });
-    this.subscription = this._service.cartItem$.subscribe(
-      data =>{
-        //changing cart data dynamically using Behaviour Subject
-        this.cartData = data;
-        console.log("shopping Cart",this.cartData);
-      }
-    );  
+      }); 
   }
 
   ngOnDestroy(){

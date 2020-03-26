@@ -1,0 +1,44 @@
+<h1>Shopping Cart</h1>
+<div class="row col-10">
+    <label>You have {{_service.cartItem$ | async}} items in your shopping cart.</label>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th class="text-center" style="width: 230px">Quantity</th>
+          <th class="text-right" style="width: 200px">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of _service.cartProduct$.cartProduct | async">
+          
+          <td>
+              {{ item.product }}
+            <!-- <div [style.backgroundImage]="'url(' + https://premium.wpmudev.org/wp-content/uploads/2011/03/image-url-1470x940.png + ')'" class="thumbnail">
+            </div> -->
+          </td>
+          <td>
+            {{ item.product }}
+          </td>
+          <td>
+              {{ item.product }}
+            <!-- <product-quantity [product]="item" [shopping-cart]="cart">
+            </product-quantity> -->
+          </td>
+          <!-- <td class="text-right">
+            {{ item.totalPrice | currency:'USD':true }}
+          </td> -->
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <!-- <th class="text-right">{{ cart.totalPrice | currency:'USD':true }}</th> -->
+        </tr>
+      </tfoot> 
+    </table>
+
+</div>

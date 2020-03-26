@@ -22,7 +22,7 @@ export class ProductCardComponent implements OnInit {
     console.log("product",this.product);
     const auth = sessionStorage.getItem('Authenticated');
     if(auth == "true"){
-      this._service.addToCart(this.product.title).subscribe(
+      this._service.addToCart(this.product).subscribe(
         data=> {
           var quantity = 0;
           for(let i=0;i<data.cartProduct.length;i++){
