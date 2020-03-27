@@ -28,7 +28,7 @@ export class ProductQuantityComponent implements OnInit {
   }
 
   removeFromCart(){
-    this._service.removeCart(this.product.title).subscribe(
+    this._service.removeCart(this.product).subscribe(
       data=> {
         var quantity = 0;
         for(let i=0;i<data.cartProduct.length;i++){

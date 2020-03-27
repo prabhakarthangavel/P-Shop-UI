@@ -36,23 +36,26 @@ export class ProductService {
 
   //Cart Products
   setProduct(products){
+    console.log("setproduct",products);
     this.cartProducts.next(products);
   }
 
   addToCart(product:ProductInterface):Observable<any>{
     const request = {
       id: sessionStorage.getItem('Authorization'),
-      product: product.title,
+      title: product.title,
       image_url: product.image_url,
       price: product.price
     }
     return this._http.post(this.addCart,request);
   }
 
-  removeCart(product): Observable<any>{
+  removeCart(product:ProductInterface): Observable<any>{
     const request = {
       id: sessionStorage.getItem('Authorization'),
-      product: product
+      title: product.title,
+      image_url: product.image_url,
+      price: product.price
     }
     return this._http.post(this.deleteCart,request);
   }
@@ -65,7 +68,7 @@ export class ProductService {
     this.cartProduct$.subscribe(
       data=>{      
         for(let i=0;i<data.cartProduct.length;i++){
-          if(product == data.cartProduct[i].product){
+          if(product == data.cartProduct[i].title){
             quantity =  data.cartProduct[i].quantity;
           }
         }  
