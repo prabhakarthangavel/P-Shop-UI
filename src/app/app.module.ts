@@ -13,6 +13,11 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ModalComponent } from './models/modal/modal.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     AuthComponent,
     RegisterComponent,
     ProductQuantityComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ModalComponent,
+    CheckOutComponent,
+    OrderSuccessComponent,
+    AdminProductsComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

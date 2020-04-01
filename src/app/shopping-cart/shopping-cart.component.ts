@@ -8,11 +8,9 @@ import { ProductInterface } from '../products/ProductInterface';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit,OnDestroy {
+export class ShoppingCartComponent implements OnInit   {
   public cart:any;
   public cart_total:number;
-  public product: ProductInterface;
-  public subscription: Subscription;
   constructor(private _service:ProductService) { }
 
   ngOnInit() {
@@ -26,20 +24,11 @@ export class ShoppingCartComponent implements OnInit,OnDestroy {
         console.log("cartALLL",this.cart);
       }
     );
-      this.subscription = this._service.getProducts(null).subscribe(
-        response => {
-          this.product = response;
-        }
-      );
   }
 
   getDisable(total){
     if(total == 0){
       return true;
     }
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
   }
 }

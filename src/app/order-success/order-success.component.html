@@ -1,0 +1,6 @@
+<div class="margin">
+  <div *ngIf="(_service.cartItem$ | async) == 0;else success">
+    <h4>Add products to the cart</h4>
+  </div>
+  <ng-template #success><h3>Thanks for your order!</h3></ng-template> 
+</div>

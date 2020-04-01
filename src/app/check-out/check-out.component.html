@@ -1,0 +1,70 @@
+<div class="margin">
+  <h2>Shipping</h2>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="cartForm" (ngSubmit)="update()">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" formControlName="name" name="name" class="form-control" placeholder="Enter Name">
+          <div *ngIf="cartForm.get('name').errors && cartForm.get('name').touched" class="alert alert-danger">Username is required</div> 
+        </div>
+        <div formGroupName="address" novalidate>
+          <label>Address</label>
+          <div class="form-group">
+            <small>Street</small>
+            <input type="text" formControlName="street" class="form-control" placeholder="Enter your Street">
+            <div *ngIf="cartForm.get('address').get('street').errors && cartForm.get('address').get('street').touched" class="alert alert-danger">Street is required</div> 
+          </div>
+          <div class="form-group">
+            <small>City</small>
+            <input type="text" formControlName="city" class="form-control" placeholder="Enter your City">
+            <div *ngIf="cartForm.get('address').get('city').errors && cartForm.get('address').get('city').touched" class="alert alert-danger">City is required</div> 
+          </div>
+          <div class="form-group">
+            <small>State</small>
+            <input type="text" formControlName="state" class="form-control" placeholder="Enter your State">
+            <div *ngIf="cartForm.get('address').get('state').errors && cartForm.get('address').get('state').touched" class="alert alert-danger">State is required</div> 
+          </div>
+          <div class="form-group">
+            <small>Zip</small>
+            <input type="text" formControlName="zip" class="form-control" placeholder="Enter your Zip Code">
+            <div *ngIf="cartForm.get('address').get('zip').errors?.required && cartForm.get('address').get('zip').touched" class="alert alert-danger">Zip code is required</div> 
+            <div *ngIf="cartForm.get('address').get('zip').errors?.numeric && cartForm.get('address').get('zip').dirty" class="alert alert-danger">Enter only numbers</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mobile</label>
+          <input type="name" formControlName="mobile" class="form-control" placeholder="Enter mobile number">
+        </div>
+        <button type="submit" class="btn btn-primary" routerLink="/order-success" [disabled]="!cartForm.valid">Submit</button>
+      </form>
+    </div>
+    <div class="col-6">
+      <table class="table  table-bordered">
+        <thead>
+          <th>
+            <h4>Order Summery</h4>
+            <p>You have {{_service.cartItem$ | async}} items in your shopping cart.</p>
+          </th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart">
+            <td>
+              {{item.quantity}} x {{item.title}}
+            </td>
+            <td class="text-right">
+              {{item.total_price}}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Total</th>
+            <th class="text-right">{{ cart_total | currency:'INR':true }}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

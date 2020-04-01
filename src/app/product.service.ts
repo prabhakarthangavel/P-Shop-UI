@@ -12,6 +12,7 @@ export class ProductService {
   private getCart: string = "http://localhost:8080/auth/getCart";
   private addCart: string = "http://localhost:8080/auth/addToCart";
   private deleteCart: string = "http://localhost:8080/auth/removeFromCart";
+  private clear: string = "http://localhost:8080/auth/clearCart";
   private _navItemSource = new BehaviorSubject<number>(0);
   public cartProducts = new ReplaySubject<any>(null);
   constructor(private _http:HttpClient,private _auth:AuthenticateService) { 
@@ -58,6 +59,10 @@ export class ProductService {
       price: product.price
     }
     return this._http.post(this.deleteCart,request);
+  }
+
+  clearCart(){
+    return this._http.get(this.clear);
   }
 
   getQuantity(product){
