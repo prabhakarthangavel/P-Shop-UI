@@ -11,6 +11,7 @@ import { cart } from '../../models/shoppingCart.interface';
 })
 export class ProductCardComponent implements OnInit {
   @Input('product')product: ProductInterface;
+  @Input('enableStatus')enableStatus: boolean;
   public cart: Array<cart>;
   constructor(private _service: ProductService, private _router:Router) { 
   }

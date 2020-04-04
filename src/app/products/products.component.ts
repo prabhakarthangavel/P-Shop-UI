@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Observer} from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -12,11 +11,11 @@ import { Observable, Observer} from 'rxjs';
 export class ProductsComponent implements OnInit, OnDestroy {
   public allProducts: Array<String>;
   public path: string;
+  public cardEnable = true;
   private subscription: Subscription;
 
   constructor(private _service:ProductService, private _route:ActivatedRoute) {
     this.path = this._route.snapshot.paramMap.get('item');
-    console.log("path",this.path);
    }
 
   ngOnInit() {

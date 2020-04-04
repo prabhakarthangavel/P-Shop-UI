@@ -1,3 +1,60 @@
-<p>
-  admin-products works!
-</p>
+<div class="margin">
+  <button class="btn btn-primary">New Product</button>
+  <div class="input-group mb-4">
+    <input type="text" class="form-control" #query (keyup)="searchProduct(query.value)" placeholder="Search Products">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+
+  <div *ngIf="search">
+      <div class="search">
+          <div class="searchResult">
+            <ul class="u-list"  *ngFor="let list of searchList">
+              <li class="l-list">
+                <div style="width:90%;">
+                  <span>{{list.title}}</span>
+                </div>
+                  <a name={{list.title}} (click)="edit($event.target.name)">Edit</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr class="text-center">
+        <th>S.No</th>
+        <th>Product</th>
+        <th style="width: 230px">Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index;">
+        <td>
+          {{i+1+(page*8)}}
+        </td>
+        <td>
+          {{product.title}}
+        </td>
+        <td>
+          {{product.price | currency:'INR':true}}
+        </td>
+        <td><a name={{product.title}} (click)="edit($event.target.name)">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" (click)="navigate('previous')" *ngIf="page!=0" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link">{{page+1}}</a></li>
+      <li class="page-item">
+        <a class="page-link" (click)="navigate('next')">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

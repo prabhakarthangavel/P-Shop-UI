@@ -13,6 +13,9 @@ export class ProductService {
   private addCart: string = "http://localhost:8080/auth/addToCart";
   private deleteCart: string = "http://localhost:8080/auth/removeFromCart";
   private clear: string = "http://localhost:8080/auth/clearCart";
+  private page: string = "http://localhost:8080/pagableProducts";
+  private search: string = "http://localhost:8080/search";
+  private edit: string = "http://localhost:8080/getProduct";
   private _navItemSource = new BehaviorSubject<number>(0);
   public cartProducts = new ReplaySubject<any>(null);
   constructor(private _http:HttpClient,private _auth:AuthenticateService) { 
@@ -81,4 +84,19 @@ export class ProductService {
   return quantity;
   }
 
+  getPageable(page){
+    const pages = {
+      page:page,
+      count: 8
+    }
+    return this._http.post(this.page,pages);
+  }
+
+  searchProduct(value):Observable<any>{
+    return this._http.get(this.search+"/"+value);
+  }
+
+  editProduct(product):Observable<any>{
+    return this._http.get(this.edit+"/"+product);
+  }
 }

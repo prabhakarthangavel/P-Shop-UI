@@ -3,10 +3,12 @@
   <div class="card-body">
     <h5 class="card-title">{{product.title}}</h5>
     <p class="card-text">{{product.price | currency:'INR':true}}</p>
+   <div *ngIf="enableStatus">
     <button *ngIf="_service.getQuantity(product.title) == 0;else enableQuantity"(click)="addToCart()" class="btn btn-primary btn-block">
       Add to Cart</button>
    <ng-template #enableQuantity>
       <app-product-quantity [product]="product"></app-product-quantity>
    </ng-template> 
+   </div>
   </div>
 </div>
