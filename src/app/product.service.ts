@@ -16,6 +16,7 @@ export class ProductService {
   private page: string = "http://localhost:8080/pagableProducts";
   private search: string = "http://localhost:8080/search";
   private edit: string = "http://localhost:8080/getProduct";
+  private update: string = "http://localhost:8080/auth/admin/updateProducts";
   private _navItemSource = new BehaviorSubject<number>(0);
   public cartProducts = new ReplaySubject<any>(null);
   constructor(private _http:HttpClient,private _auth:AuthenticateService) { 
@@ -98,5 +99,9 @@ export class ProductService {
 
   editProduct(product):Observable<any>{
     return this._http.get(this.edit+"/"+product);
+  }
+
+  updateProduct(product):Observable<any>{
+    return this._http.post(this.update,product);
   }
 }

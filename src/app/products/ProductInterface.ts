@@ -5,4 +5,5 @@ export interface ProductInterface {
     price: number;
     total_price: number;
     title: string;
+    stock?: number;
 } 
