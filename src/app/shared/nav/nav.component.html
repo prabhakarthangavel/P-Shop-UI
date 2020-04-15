@@ -12,7 +12,7 @@
             <a class="dropdown-item" routerLink="/app-my-orders">My Orders</a>
             <a class="dropdown-item" routerLink="/check-out">Check Out</a>
             <a class="dropdown-item" routerLink="/admin/products">Admin Products</a> 
-            <a class="dropdown-item" (click)="logout()" href="">Logout</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
       <button type="button" *ngIf="login" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
         {{ name | titlecase}}

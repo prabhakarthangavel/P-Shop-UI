@@ -18,6 +18,8 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AuthGuardService } from './shared/auth-guard.service';
+import { AdminGuardService } from './shared/admin-guard.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuardService,
+    AdminGuardService
   ],
   bootstrap: [AppComponent]
 })

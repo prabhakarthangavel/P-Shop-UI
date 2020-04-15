@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError,of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError,map, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { HttpEvent, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticateService {
   private loginUrl: string = "http://localhost:8080/auth/authentication";
+  private adminCheck: string = "http://localhost:8080/auth/admin";
   public username: string = "User Name";
   private storageSub= new Subject<string>();
   constructor(private _http:HttpClient) { }
@@ -34,6 +36,21 @@ export class AuthenticateService {
   removeItem(key) {
     sessionStorage.removeItem(key);
     this.storageSub.next('removed');
+  }
+
+  verifyAdmin(){
+    return this._http.get(this.adminCheck,{observe : 'response'}).pipe(
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          return event;
+        }
+      },(err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 403) {
+         this.handleError(err);
+        }
+      }
+    }));
   }
 
   private handleError(error: HttpErrorResponse) {

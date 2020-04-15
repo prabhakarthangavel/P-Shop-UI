@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../../product.service';
 import { AuthenticateService } from '../../auth/authenticate.service';
-import { Subscription, Observable, of } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -14,7 +15,7 @@ export class NavComponent implements OnInit, OnDestroy {
   public cartData:any;
   public cartCount: number;
   public subscription: Subscription;
-  constructor(private _service:ProductService,private _auth:AuthenticateService) {
+  constructor(private _service:ProductService,private _auth:AuthenticateService,private _router:Router) {
     const authenticated = sessionStorage.getItem('Authenticated');
     if(authenticated == "true"){
       this.getCart();
@@ -50,6 +51,11 @@ export class NavComponent implements OnInit, OnDestroy {
           this._service.changeCart(quantity);
         }
       }); 
+  }
+
+  logout(){
+    sessionStorage.clear();
+    window.location.reload();
   }
 
   ngOnDestroy(){
