@@ -32,6 +32,11 @@ export class AuthComponent implements OnInit {
           sessionStorage.setItem("Authorization","Basic " + btoa(this.loginForm.value.username+":"+this.loginForm.value.password));
           this._service.setItem("username",this.loginForm.value.username);
           this._router.navigate(["/products"]);
+          if(response.role == "ADMIN"){
+            this._service.setadminStatus(true);
+          }else{
+            this._service.setadminStatus(false);
+          }
         }
       },error=>{
         let err:any = error;
@@ -41,6 +46,7 @@ export class AuthComponent implements OnInit {
           sessionStorage.setItem("Authenticated","false");
           sessionStorage.removeItem("Authorization");
           this._service.removeItem("username");
+          this._service.setadminStatus(false);
         }
       }
     )

@@ -1,8 +1,11 @@
 .card{
     margin: 5%;
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 7px lightgray;
 }
 
 img.card-img-top {
     flex-shrink: 0;
-    min-height: 15vw;
+    height: 15vw;
 }

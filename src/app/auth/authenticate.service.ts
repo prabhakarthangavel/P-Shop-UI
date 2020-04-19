@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError,of } from 'rxjs';
-import { catchError,map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpEvent, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,21 @@ export class AuthenticateService {
   private loginUrl: string = "http://localhost:8080/auth/authentication";
   private adminCheck: string = "http://localhost:8080/auth/admin";
   public username: string = "User Name";
+  public admin: boolean;
   private storageSub= new Subject<string>();
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient, private _router:Router) { }
 
   login(content): Observable<any> {
     let headers = new HttpHeaders();
+    let data = {
+      username : content.username,
+      password : content.password
+    }
     let username =  content.username;
     let password = content.password;
     headers = headers.append("Authorization", "Basic " + btoa(username+":"+password));
-    headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
-    return this._http.get(this.loginUrl,{headers:headers});
+    headers = headers.append("Content-Type", "application/json");
+    return this._http.post(this.loginUrl,data,{headers:headers});
   }
 
   watchStorage(): Observable<any> {
@@ -38,6 +44,14 @@ export class AuthenticateService {
     this.storageSub.next('removed');
   }
 
+  setadminStatus(value:boolean){
+    this.admin = value;
+  }
+
+  getadminStatus():boolean{
+    return this.admin;
+  }
+  
   verifyAdmin(){
     return this._http.get(this.adminCheck,{observe : 'response'}).pipe(
       tap((event: HttpEvent<any>) => {
@@ -48,6 +62,7 @@ export class AuthenticateService {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 403) {
          this.handleError(err);
+         this._router.navigate(['forbidden']);
         }
       }
     }));

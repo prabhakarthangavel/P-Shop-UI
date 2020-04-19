@@ -10,6 +10,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { AdminGuardService } from './shared/admin-guard.service';
 import { LoginDeactivateService } from './auth/login-deactivate.service';
+import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: 'products/', component: ProductsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AdminGuardService] },
   { path: 'admin/products/:product', component: ProductFormComponent, canActivate: [AdminGuardService] },
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: '', redirectTo: 'products/', pathMatch: 'full' },
   { path: '**', redirectTo: 'products/' },
 ];

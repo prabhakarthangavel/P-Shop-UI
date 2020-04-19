@@ -20,6 +20,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { AdminGuardService } from './shared/admin-guard.service';
+import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AdminGuardService } from './shared/admin-guard.service';
     CheckOutComponent,
     OrderSuccessComponent,
     AdminProductsComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

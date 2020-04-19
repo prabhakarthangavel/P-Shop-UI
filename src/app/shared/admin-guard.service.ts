@@ -15,7 +15,8 @@ export class AdminGuardService implements CanActivate, OnDestroy {
   canActivate():boolean|Observable<boolean>{
     return this._auth.verifyAdmin().pipe(
       map(response=>{
-        if(response.status ==200){
+        console.log("response",response);
+        if(response['status'] ==200){
           return true;
         }
         return false;
