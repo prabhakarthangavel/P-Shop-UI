@@ -3,20 +3,13 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { AuthenticateService } from './auth/authenticate.service';
 import { ProductInterface } from './products/ProductInterface';
+import { MOCKAPI } from './shared/MOCKAPI.const';
+import { API } from './shared/API.const';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private allProducts: string = "http://localhost:8080/getAllProducts";
-  private getCart: string = "http://localhost:8080/auth/getCart";
-  private addCart: string = "http://localhost:8080/auth/addToCart";
-  private deleteCart: string = "http://localhost:8080/auth/removeFromCart";
-  private clear: string = "http://localhost:8080/auth/clearCart";
-  private page: string = "http://localhost:8080/pagableProducts";
-  private search: string = "http://localhost:8080/search";
-  private edit: string = "http://localhost:8080/getProduct";
-  private update: string = "http://localhost:8080/auth/admin/updateProducts";
   private _navItemSource = new BehaviorSubject<number>(0);
   public cartProducts = new ReplaySubject<any>(null);
   constructor(private _http:HttpClient,private _auth:AuthenticateService) { 
@@ -32,11 +25,11 @@ export class ProductService {
 
   getProducts(path):Observable<any>{
     const param:HttpParams = new HttpParams().set('product',path);
-    return this._http.get(this.allProducts+"/"+path); 
+    return this._http.get(MOCKAPI.allProducts+"/"+path); 
   }
 
   getShoppingCart():Observable<any>{ 
-    return this._http.get(this.getCart);
+    return this._http.get(MOCKAPI.getCart);
   }
 
   //Cart Products
@@ -52,7 +45,7 @@ export class ProductService {
       image_url: product.image_url,
       price: product.price
     }
-    return this._http.post(this.addCart,request);
+    return this._http.post(MOCKAPI.addCart,request);
   }
 
   removeCart(product:ProductInterface): Observable<any>{
@@ -62,11 +55,11 @@ export class ProductService {
       image_url: product.image_url,
       price: product.price
     }
-    return this._http.post(this.deleteCart,request);
+    return this._http.post(MOCKAPI.deleteCart,request);
   }
 
   clearCart(){
-    return this._http.get(this.clear);
+    return this._http.get(MOCKAPI.clear);
   }
 
   getQuantity(product){
@@ -90,18 +83,18 @@ export class ProductService {
       page:page,
       count: 8
     }
-    return this._http.post(this.page,pages);
+    return this._http.post(MOCKAPI.page,pages);
   }
 
   searchProduct(value):Observable<any>{
-    return this._http.get(this.search+"/"+value);
+    return this._http.get(MOCKAPI.search+"/"+value);
   }
 
   editProduct(product):Observable<any>{
-    return this._http.get(this.edit+"/"+product);
+    return this._http.get(MOCKAPI.edit+"/"+product);
   }
 
   updateProduct(product):Observable<any>{
-    return this._http.post(this.update,product);
+    return this._http.post(MOCKAPI.update,product);
   }
 }

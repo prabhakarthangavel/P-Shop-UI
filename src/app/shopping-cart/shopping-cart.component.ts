@@ -11,7 +11,7 @@ import { ProductInterface } from '../products/ProductInterface';
 export class ShoppingCartComponent implements OnInit   {
   public cart:any;
   public cart_total:number;
-  constructor(private _service:ProductService) { }
+  constructor(public _service:ProductService) { }
 
   ngOnInit() {
     this._service.cartProduct$.subscribe(

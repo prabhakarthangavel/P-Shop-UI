@@ -7,7 +7,7 @@ import { ProductService } from '../product.service';
 })
 export class OrderSuccessComponent implements OnInit {
 
-  constructor(private _service:ProductService) { }
+  constructor(public _service:ProductService) { }
 
   ngOnInit() {
   }

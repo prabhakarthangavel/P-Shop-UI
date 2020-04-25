@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule} from 'angularfire2';
+import { environment } from './../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +23,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { AuthGuardService } from './shared/auth-guard.service';
 import { AdminGuardService } from './shared/admin-guard.service';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
+import { NumericDirective } from './shared/numeric.directive';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,15 @@ import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
     OrderSuccessComponent,
     AdminProductsComponent,
     ProductFormComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    NumericDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -22,7 +22,7 @@ export class CheckOutComponent implements OnInit {
     mobile:['',Validators.required]
   });
 
-  constructor(private _service:ProductService, private fb: FormBuilder) { 
+  constructor(public _service:ProductService, private fb: FormBuilder) { 
   
   }
 

@@ -15,7 +15,7 @@ export class NavComponent implements OnInit, OnDestroy {
   public cartData:any;
   public cartCount: number;
   public subscription: Subscription;
-  constructor(private _service:ProductService,private _auth:AuthenticateService,private _router:Router) {
+  constructor(private _service:ProductService,public _auth:AuthenticateService,private _router:Router) {
     const authenticated = sessionStorage.getItem('Authenticated');
     if(authenticated == "true"){
       this.getCart();

@@ -9,7 +9,7 @@ import { ProductInterface } from '../ProductInterface';
 })
 export class ProductQuantityComponent implements OnInit {
   @Input('product')product: ProductInterface;
-  constructor(private _service:ProductService) { }
+  constructor(public _service:ProductService) { }
 
   ngOnInit() {
   }

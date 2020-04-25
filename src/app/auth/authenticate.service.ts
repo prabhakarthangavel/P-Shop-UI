@@ -5,13 +5,13 @@ import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpEvent, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MOCKAPI } from './../shared/MOCKAPI.const';
+import { API } from './../shared/API.const';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticateService {
-  private loginUrl: string = "http://localhost:8080/auth/authentication";
-  private adminCheck: string = "http://localhost:8080/auth/admin";
   public username: string = "User Name";
   public admin: boolean;
   private storageSub= new Subject<string>();
@@ -27,7 +27,7 @@ export class AuthenticateService {
     let password = content.password;
     headers = headers.append("Authorization", "Basic " + btoa(username+":"+password));
     headers = headers.append("Content-Type", "application/json");
-    return this._http.post(this.loginUrl,data,{headers:headers});
+    return this._http.post(MOCKAPI.loginUrl,data,{headers:headers});
   }
 
   watchStorage(): Observable<any> {
@@ -53,7 +53,7 @@ export class AuthenticateService {
   }
   
   verifyAdmin(){
-    return this._http.get(this.adminCheck,{observe : 'response'}).pipe(
+    return this._http.get(MOCKAPI.adminCheck,{observe : 'response'}).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           return event;
