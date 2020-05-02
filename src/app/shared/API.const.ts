@@ -1,7 +1,8 @@
 export const API = {
     loginUrl: "http://pshop.us-east-2.elasticbeanstalk.com/auth/authentication",
     adminCheck:  "http://pshop.us-east-2.elasticbeanstalk.com/auth/admin",
-  
+    register: "http://pshop.us-east-2.elasticbeanstalk.com/register",
+
     allProducts: "http://pshop.us-east-2.elasticbeanstalk.com/getAllProducts",
     getCart: "http://pshop.us-east-2.elasticbeanstalk.com/auth/getCart",
     addCart: "http://pshop.us-east-2.elasticbeanstalk.com/auth/addToCart",

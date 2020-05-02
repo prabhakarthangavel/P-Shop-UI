@@ -1,7 +1,8 @@
 export const MOCKAPI = {
     loginUrl: "http://localhost:8080/auth/authentication",
     adminCheck:  "http://localhost:8080/auth/admin",
-  
+    register: "http://localhost:8080/register",
+
     allProducts: "http://localhost:8080/getAllProducts",
     getCart: "http://localhost:8080/auth/getCart",
     addCart: "http://localhost:8080/auth/addToCart",

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticateService } from '../authenticate.service';
+import { NumericDirective } from '../../shared/numeric.directive';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,36 +18,38 @@ export class RegisterComponent implements OnInit {
   }
 
   registerForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required, NumericDirective.space]),
     password: new FormControl('', Validators.required),
     confirm_password: new FormControl('', Validators.required)
   });
 
   cancel() {
-    this._router.navigate(['/authenticate']);
+    this._router.navigate(['/login']);
   }
 
   registerSubmit() {
     this.warn = false;
     this.message = ""
-    console.log(this.registerForm.value.password,this.registerForm.value.confirm_password);
-    if(this.registerForm.value.password != this.registerForm.value.confirm_password){
+    if (this.registerForm.value.password != this.registerForm.value.confirm_password) {
       this.warn = true;
       this.message = "Password and Confirm password must be same";
+    } else {
+      this._auth.register(this.registerForm.value).subscribe(
+        data => {
+          console.log("data", data);
+          this.registerForm.reset();
+          if (data && data.status == 200) {
+            this.message = data.body['status'];
+            setTimeout(() => {
+              this._router.navigate(['/login']);
+            },
+              2000);
+          }
+        },(error)=>{
+          this.warn = true;
+          this.message = error.error.errorMessage;
+        });
     }
-    // this._auth.register(this.registerForm.value).subscribe(
-    //   data => {
-    //     this.registerForm.reset();
-    //     console.log("Putdata", data);
-    //     this.warn = true;
-    //     this.message = data.status;
-    //     if (data && data.status === "Success") {
-    //       setTimeout(() => {
-    //         this._router.navigate(['/authenticate']);
-    //       },
-    //         2000);
-    //     }
-    //   });
   }
 
 }

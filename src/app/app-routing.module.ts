@@ -11,6 +11,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { AdminGuardService } from './shared/admin-guard.service';
 import { LoginDeactivateService } from './auth/login-deactivate.service';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   { path: 'products/', component: ProductsComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'products-fruits/:item', component: ProductsComponent },
   { path: 'products-vegetables/:item', component: ProductsComponent },
   { path: 'login', component: AuthComponent, canActivate: [LoginDeactivateService] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoginDeactivateService] },
   { path: 'shopping_cart', component: ShoppingCartComponent, canActivate: [AuthGuardService] },
   { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
@@ -30,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

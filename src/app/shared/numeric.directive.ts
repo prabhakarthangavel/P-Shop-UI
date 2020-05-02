@@ -14,5 +14,16 @@ export class NumericDirective {
     
       return null;
   } 
+
+  static space(control: AbstractControl): {[key:string]:any} | null {
+    let val:string = control.value;
+    var numbers = /^[0-9]+$/;
+
+    if(/\s/g.test(val)) 
+      return { 'space': true};
+    
+      return null;
+  } 
 }
+
  

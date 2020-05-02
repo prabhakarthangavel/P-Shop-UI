@@ -12,7 +12,7 @@ import { API } from './shared/API.const';
 export class ProductService {
   private _navItemSource = new BehaviorSubject<number>(0);
   public cartProducts = new ReplaySubject<any>(null);
-  constructor(private _http:HttpClient,private _auth:AuthenticateService) { 
+  constructor(private _http: HttpClient, private _auth: AuthenticateService) {
   }
 
   public cartItem$ = this._navItemSource.asObservable();
@@ -23,78 +23,97 @@ export class ProductService {
     this._navItemSource.next(number);
   }
 
-  getProducts(path):Observable<any>{
-    const param:HttpParams = new HttpParams().set('product',path);
-    return this._http.get(MOCKAPI.allProducts+"/"+path); 
+  getProducts(path): Observable<any> {
+    const param: HttpParams = new HttpParams().set('product', path);
+    return this._http.get(MOCKAPI.allProducts + "/" + path);
   }
 
-  getShoppingCart():Observable<any>{ 
+  getShoppingCart(): Observable<any> {
     return this._http.get(MOCKAPI.getCart);
   }
 
   //Cart Products
-  setProduct(products){
-    console.log("setproduct",products);
+  setProduct(products) {
+    console.log("setproduct", products);
     this.cartProducts.next(products);
   }
 
-  addToCart(product:ProductInterface):Observable<any>{
+  addToCart(product: ProductInterface): Observable<any> {
     const request = {
       id: sessionStorage.getItem('Authorization'),
       title: product.title,
       image_url: product.image_url,
       price: product.price
     }
-    return this._http.post(MOCKAPI.addCart,request);
+    return this._http.post(MOCKAPI.addCart, request);
   }
 
-  removeCart(product:ProductInterface): Observable<any>{
+  removeCart(product: ProductInterface): Observable<any> {
     const request = {
       id: sessionStorage.getItem('Authorization'),
       title: product.title,
       image_url: product.image_url,
       price: product.price
     }
-    return this._http.post(MOCKAPI.deleteCart,request);
+    return this._http.post(MOCKAPI.deleteCart, request);
   }
 
-  clearCart(){
+  clearCart() {
     return this._http.get(MOCKAPI.clear);
   }
 
-  getQuantity(product){
-    if(!sessionStorage.getItem('Authenticated') || sessionStorage.getItem('Authenticated') == 'false'){
+  getQuantity(product) {
+    if (!sessionStorage.getItem('Authenticated') || sessionStorage.getItem('Authenticated') == 'false') {
       return 0;
-    }; 
+    };
     var quantity = 0;
     this.cartProduct$.subscribe(
-      data=>{      
-        for(let i=0;i<data.cartProduct.length;i++){
-          if(product == data.cartProduct[i].title){
-            quantity =  data.cartProduct[i].quantity;
+      data => {
+        for (let i = 0; i < data.cartProduct.length; i++) {
+          if (product == data.cartProduct[i].title) {
+            quantity = data.cartProduct[i].quantity;
           }
-        }  
-  });
-  return quantity;
+        }
+      });
+    return quantity;
   }
 
-  getPageable(page){
+  getStock(product): boolean {
+    var bool = false;
+    var quantity = 0;
+    var stock = 0;
+    this.cartProduct$.subscribe(
+      data => {
+        for (let i = 0; i < data.cartProduct.length; i++) {
+          if (product == data.cartProduct[i].title) {
+            quantity = data.cartProduct[i].quantity;
+            stock = data.cartProduct[i].stock;
+          }
+        }
+        if (quantity && quantity === stock) {
+          bool = true;
+        }
+      });
+    return bool;
+  }
+
+  getPageable(page) {
     const pages = {
-      page:page,
+      page: page,
       count: 8
     }
-    return this._http.post(MOCKAPI.page,pages);
+    return this._http.post(MOCKAPI.page, pages);
   }
 
-  searchProduct(value):Observable<any>{
-    return this._http.get(MOCKAPI.search+"/"+value);
+  searchProduct(value): Observable<any> {
+    return this._http.get(MOCKAPI.search + "/" + value);
   }
 
-  editProduct(product):Observable<any>{
-    return this._http.get(MOCKAPI.edit+"/"+product);
+  editProduct(product): Observable<any> {
+    return this._http.get(MOCKAPI.edit + "/" + product);
   }
 
-  updateProduct(product):Observable<any>{
-    return this._http.post(MOCKAPI.update,product);
+  updateProduct(product): Observable<any> {
+    return this._http.post(MOCKAPI.update, product);
   }
 }
