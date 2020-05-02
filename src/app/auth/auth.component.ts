@@ -33,9 +33,9 @@ export class AuthComponent implements OnInit {
           this._service.setItem("username",this.loginForm.value.username);
           this._router.navigate(["/products"]);
           if(response.role == "ADMIN"){
-            this._service.setadminStatus(true);
+            sessionStorage.setItem('Admin','true');
           }else{
-            this._service.setadminStatus(false);
+            sessionStorage.setItem('Admin','false');
           }
         }
       },error=>{

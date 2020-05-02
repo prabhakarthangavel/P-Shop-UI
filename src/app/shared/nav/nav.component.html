@@ -9,7 +9,7 @@
 
      <div class="dropdown">
         <div class="dropdown-menu">
-          <div *ngIf="_auth.getadminStatus()">
+          <div *ngIf="_auth.getadminStatus() == 'true'">
               <a class="dropdown-item" routerLink="/app-my-orders">My Orders</a>
               <a class="dropdown-item" routerLink="/admin/products">Admin Products</a> 
           </div>

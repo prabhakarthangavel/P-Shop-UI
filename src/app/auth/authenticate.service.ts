@@ -44,12 +44,8 @@ export class AuthenticateService {
     this.storageSub.next('removed');
   }
 
-  setadminStatus(value:boolean){
-    this.admin = value;
-  }
-
-  getadminStatus():boolean{
-    return this.admin;
+  getadminStatus():string{
+    return sessionStorage.getItem('Admin');
   }
   
   verifyAdmin(){
