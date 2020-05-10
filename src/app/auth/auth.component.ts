@@ -34,8 +34,6 @@ export class AuthComponent implements OnInit {
           this._router.navigate(["/products"]);
           if(response.role == "ADMIN"){
             sessionStorage.setItem('Admin','true');
-          }else{
-            sessionStorage.setItem('Admin','false');
           }
         }
       },error=>{
@@ -46,7 +44,6 @@ export class AuthComponent implements OnInit {
           sessionStorage.setItem("Authenticated","false");
           sessionStorage.removeItem("Authorization");
           this._service.removeItem("username");
-          this._service.setadminStatus(false);
         }
       }
     )

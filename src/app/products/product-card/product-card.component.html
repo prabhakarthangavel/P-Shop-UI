@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
   <img *ngIf="!_service.getStock(product.title)" [src]="product.image_url" class="card-img-top" alt="...">
-  <img *ngIf="_service.getStock(product.title)" class="card-img-top"  src="assets/out-of-stock.png" class="card-img-top" alt="...">
+  <img *ngIf="_service.getStock(product.title)" class="card-img-top "  src="assets/out-of-stock.png" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{product.title}}</h5>
     <p class="card-text">{{product.price | currency:'INR':true}}</p>

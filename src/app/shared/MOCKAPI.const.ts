@@ -11,5 +11,6 @@ export const MOCKAPI = {
     page: "http://localhost:8080/pagableProducts",
     search: "http://localhost:8080/search",
     edit: "http://localhost:8080/getProduct",
-    update: "http://localhost:8080/auth/admin/updateProducts"
+    update: "http://localhost:8080/auth/admin/updateProducts",
+    updateCheckout: "http://localhost:8080/auth/updateCheckout"
 }

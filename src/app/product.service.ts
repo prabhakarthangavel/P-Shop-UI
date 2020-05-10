@@ -116,4 +116,13 @@ export class ProductService {
   updateProduct(product): Observable<any> {
     return this._http.post(MOCKAPI.update, product);
   }
+
+  updateCartout(address,cart){
+    const checkout = {
+      address: address,
+      cartList: cart
+    }
+    console.log("checkout",checkout);
+    return this._http.post(MOCKAPI.updateCheckout,checkout);
+  }
 }

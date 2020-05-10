@@ -11,5 +11,6 @@ export const API = {
     page: "http://pshop.us-east-2.elasticbeanstalk.com/pagableProducts",
     search: "http://pshop.us-east-2.elasticbeanstalk.com/search",
     edit: "http://pshop.us-east-2.elasticbeanstalk.com/getProduct",
-    update: "http://pshop.us-east-2.elasticbeanstalk.com/auth/admin/updateProducts"
+    update: "http://pshop.us-east-2.elasticbeanstalk.com/auth/admin/updateProducts",
+    updateCheckout: "http://pshop.us-east-2.elasticbeanstalk.com/auth/updateCheckout"
 }

@@ -31,7 +31,6 @@ export class CheckOutComponent implements OnInit {
       data=>{
         this.cart_total = 0;
         this.cart = data.cartProduct;
-        console.log("data",this.cart);
         for(let i=0;i<this.cart.length;i++){
           this.cart_total += this.cart[i].total_price;;
         }
@@ -40,7 +39,8 @@ export class CheckOutComponent implements OnInit {
   }
 
   update(){
-    console.log("form value",this.cartForm.value);
+    this._service.updateCartout(this.cartForm.value,this.cart).subscribe();
+    // console.log("form value",this.cartForm.value,this.cart);
   }
 
 }
