@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule} from 'angularfire2';
 import { environment } from './../environments/environment';
+import { FormsModule } from '@angular/forms'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { AuthGuardService } from './shared/auth-guard.service';
 import { AdminGuardService } from './shared/admin-guard.service';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 import { NumericDirective } from './shared/numeric.directive';
+import { FileDiffComponent } from './file-diff/file-diff.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +43,15 @@ import { NumericDirective } from './shared/numeric.directive';
     AdminProductsComponent,
     ProductFormComponent,
     ForbiddenComponent,
-    NumericDirective
+    NumericDirective,
+    FileDiffComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [

@@ -12,6 +12,7 @@ import { AdminGuardService } from './shared/admin-guard.service';
 import { LoginDeactivateService } from './auth/login-deactivate.service';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { FileDiffComponent } from './file-diff/file-diff.component';
 
 const routes: Routes = [
   { path: 'products/', component: ProductsComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AdminGuardService] },
   { path: 'admin/products/:product', component: ProductFormComponent, canActivate: [AdminGuardService] },
+  { path: 'file-diff', component: FileDiffComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '', redirectTo: 'products/', pathMatch: 'full' },
   { path: '**', redirectTo: 'products/' },

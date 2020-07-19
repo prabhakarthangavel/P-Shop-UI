@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="card col-6 margin">
+    <div class="card-body">
+      <textarea [(ngModel)]="leftArea"></textarea>
+    </div>
+  </div>
+  <div class="card col-6 margin">
+    <div class="card-body">
+      <textarea [(ngModel)]="rightArea"></textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="card col margin">
+    <div class="card-body">
+      This is some text within a card body.
+    </div>
+  </div>
+</div>
+
+<div>
+  {{leftArea}}
+</div>
+<div *ngIf="asyncString$ | async as asyncString">
+  {{asyncString.status}}
+</div>
+<!-- <div *ngFor="let asyncString of asyncString$ | async">
+  {{asyncString.status}}
+</div> -->
